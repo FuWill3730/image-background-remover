@@ -27,7 +27,11 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      const msg = errorData?.errors?.[0]?.title || `Remove.bg API error: ${response.status}`;
+      let msg = errorData?.errors?.[0]?.title || `Remove.bg API error: ${response.status}`;
+      if (response.status === 402) msg = "API 额度已用完，请前往 remove.bg 充值或等待下月重置";
+      if (response.status === 403) msg = "API Key 无效，请检查配置";
+      if (response.status === 422) msg = "无法识别图片中的前景主体，请尝试换一张主体更清晰的图片（建议：人像、产品图、动物等）";
+      if (response.status === 429) msg = "请求过于频繁，请稍后再试";
       return NextResponse.json({ status: "error", message: msg }, { status: response.status });
     }
 

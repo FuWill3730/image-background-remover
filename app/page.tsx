@@ -68,7 +68,7 @@ export default function Home() {
             </svg>
           </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-gray-900 via-indigo-900 to-purple-900 bg-clip-text text-transparent">
-            Image Background Remover
+            智抠图
           </h1>
           <p className="text-gray-500 mt-4 text-lg max-w-lg mx-auto leading-relaxed">
             AI 智能抠图，一键去除图片背景，生成透明 PNG
@@ -198,7 +198,7 @@ export default function Home() {
         <footer className="text-center mt-20 pb-6">
           <div className="inline-flex items-center gap-2 text-sm text-gray-400">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-gray-300" />
-            Image Background Remover
+            智抠图
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-gray-300" />
           </div>
           <p className="text-xs text-gray-300 mt-1">免费 AI 在线抠图工具</p>

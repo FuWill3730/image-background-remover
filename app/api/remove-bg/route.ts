@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export const runtime = 'edge';
-
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
@@ -38,12 +36,7 @@ export async function POST(request: NextRequest) {
     }
 
     const buffer = await response.arrayBuffer();
-    const bytes = new Uint8Array(buffer);
-    let binary = '';
-    for (let i = 0; i < bytes.length; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    const base64 = btoa(binary);
+    const base64 = Buffer.from(buffer).toString("base64");
 
     return NextResponse.json({ status: "success", processedImage: base64 });
   } catch (error) {

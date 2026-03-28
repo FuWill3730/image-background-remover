@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
-import Link from "next/link";
+import { useSession, signIn } from "next-auth/react";
 import ImageUploader from "./components/ImageUploader";
+import UserDropdown from "./components/UserDropdown";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -65,35 +65,8 @@ export default function Home() {
         {/* Header */}
         <header className="text-center mb-14 animate-fade-in">
           {status === "authenticated" && session?.user && (
-            <div className="absolute top-6 right-6 flex items-center gap-3">
-              <Link
-                href="/profile"
-                className="flex items-center gap-2.5 rounded-2xl bg-white/80 backdrop-blur-sm px-3 py-1.5 ring-1 ring-gray-900/5 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all"
-              >
-                {session.user.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={session.user.image} alt="avatar" className="w-8 h-8 rounded-xl object-cover" />
-                ) : (
-                  <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
-                    <span className="text-white text-sm font-bold">{session.user.name?.charAt(0) ?? "U"}</span>
-                  </div>
-                )}
-                <span className="text-sm font-medium text-gray-700 hidden sm:inline max-w-[120px] truncate">
-                  {session.user.name}
-                </span>
-                <svg className="w-3.5 h-3.5 text-gray-400 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-              <button
-                onClick={() => signOut()}
-                className="text-sm text-gray-400 hover:text-gray-600 transition-colors"
-                title="退出登录"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                </svg>
-              </button>
+            <div className="absolute top-6 right-6">
+              <UserDropdown />
             </div>
           )}
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 shadow-xl shadow-indigo-500/25 mb-6">
